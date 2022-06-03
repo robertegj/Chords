@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <script>
+        let title = "Guitar-Chords by RobertEGJ";
+        let description = "Here's a place for guitar chords";
+
+        document.title = title;
+
+        var header = document.createElement("h1");
+        header.innerText = title;
+        var paragraph = document.createElement("p"); 
+        var list = document.createElement("ul"); 
+        list.id = "list";
+
+        document.body.appendChild(header);
+        document.body.appendChild(paragraph);
+        document.body.appendChild(list);
+
+        function populateList(list){
+            list = list.split(/[\r\n]+/);
+            listElement = document.getElementById("list");
+            for(i=0;i<list.length;i++) {
+                console.log(list[i]);
+                var a = document.createElement("a");
+                a.href = "/Chords/" + list[i];
+                var li = document.createElement("li");
+                li.innerText = list[i];
+                a.appendChild(li);
+                listElement.appendChild(a);
+            }
+
+        }
+
+        fetch('/Chords/chords-list.csv')
+            .then(response => response.text())
+            .then(text => populateList(text))
+            // outputs the content of the text file
+
+      </script>
+</body>
+</html>

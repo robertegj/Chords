@@ -6,8 +6,9 @@ from os import walk
 filenames = next(walk('Chords'), (None, None, []))[2]  # [] if no file
 print(filenames)
 
-# Write them to a list
-with open("Chords/chords-list.csv") as file:
+# Write them to a list 
+with open("Chords/chords-list.csv", 'w', encoding='UTF8') as file:
     csvwriter = csv.writer(file)
     for row in filenames:
-        print(row)
+        print([row])
+        csvwriter.writerow([row])
