@@ -1,16 +1,13 @@
 import csv
+from os import walk
+
 
 # Read all chords from Chords dir
-
-
+filenames = next(walk('Chords'), (None, None, []))[2]  # [] if no file
+print(filenames)
 
 # Write them to a list
 with open("Chords/chords-list.csv") as file:
-    csvreader = csv.reader(file)
-    chords = []
-    for row in csvreader:
-        chords.append(row[0])
-
-
-print(chords)
-print("...Added")
+    csvwriter = csv.writer(file)
+    for row in filenames:
+        print(row)

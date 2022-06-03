@@ -1,9 +1,12 @@
 import time
+import re
 import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 driver = webdriver.Firefox()
+
+# Insert your own URLs, these are for educational purposes only
 
 bookmarkURLs = ["http://tabs.ultimate-guitar.com/b/beatles/eleanor_rigby_ver2_crd.htm",
 "https://tabs.ultimate-guitar.com/tab/weezer/hash-pipe-chords-1009559",
@@ -120,6 +123,7 @@ for bookmarkURL in bookmarkURLs:
         print("Expired")
         continue
     n=driver.title+'.txt'
+    re.sub(' .*(.Com)','',n)
     try:
         chordElem = driver.find_element(By.XPATH, "//pre")
     except:
