@@ -10,7 +10,7 @@
         let description = "Here's a place for guitar chords";
         var path = document.location["pathname"];
         if(path=="/index.html"){
-            path = "";
+            path = "/";
         }
 
         document.title = title;
@@ -32,7 +32,7 @@
             for(i=0;i<list.length;i++) {
                 console.log(list[i]);
                 var a = document.createElement("a");
-                a.href = path + "/Chords/" + list[i];
+                a.href = path + "Chords/" + list[i];
                 var li = document.createElement("li");
                 li.innerText = list[i];
                 a.appendChild(li);
@@ -41,7 +41,7 @@
 
         }
 
-        fetch(path + '/Chords/chords-list.csv')
+        fetch(path + 'Chords/chords-list.csv')
             .then(response => response.text())
             .then(text => populateList(text))
             // outputs the content of the text file
