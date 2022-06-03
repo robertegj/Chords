@@ -8,6 +8,10 @@
     <script>
         let title = "Guitar-Chords by RobertEGJ";
         let description = "Here's a place for guitar chords";
+        var path = document.location["pathname"];
+        if(path=="/index.html"){
+            path = "";
+        }
 
         document.title = title;
 
@@ -22,12 +26,13 @@
         document.body.appendChild(list);
 
         function populateList(list){
-            list = list.split(/[\r\n]+/);
-            listElement = document.getElementById("list");
+            var list = list.split(/[\r\n]+/);
+            var listElement = document.getElementById("list");
+
             for(i=0;i<list.length;i++) {
                 console.log(list[i]);
                 var a = document.createElement("a");
-                a.href = "/Guitar-Chords/Chords/" + list[i];
+                a.href = path + "/Chords/" + list[i];
                 var li = document.createElement("li");
                 li.innerText = list[i];
                 a.appendChild(li);
@@ -36,7 +41,7 @@
 
         }
 
-        fetch('/Guitar-Chords/Chords/chords-list.csv')
+        fetch(path + '/Chords/chords-list.csv')
             .then(response => response.text())
             .then(text => populateList(text))
             // outputs the content of the text file
