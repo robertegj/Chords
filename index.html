@@ -2,13 +2,34 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+      body {
+        background: #fee;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      }
+      #header {
+        border-bottom: 1px solid black;
+      }
+      #searchBar {
+        float: right;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+            background: #222;
+        }
+      }
+  </style>
+
 </head>
 
 <body>
     <script>
-        let title = "Guitar-Chords by RobertEGJ";
+        // todo: light dark theme style, basic fonts, icon
+        // CONFIG
+        let title = "Guitar-Chords 🎸 by RobertEGJ";
         let description = "Here's a place for guitar chords";
         var path = document.location["pathname"];
+
         if(path=="/index.html"){
             path = "/";
         }
@@ -17,7 +38,16 @@
 
         var header = document.createElement("h1");
         header.innerText = title;
-        var paragraph = document.createElement("p"); 
+        header.id = "header";
+        var searchBar = document.createElement("input");
+        searchBar.id = "searchBar";
+        searchBar.type = "text";
+        searchBar.placeholder = "Search chords...";
+        searchBar.autofocus = "autofocus";
+        header.appendChild(searchBar);
+
+        var paragraph = document.createElement("p");
+
         var list = document.createElement("ul"); 
         list.id = "list";
 
@@ -30,13 +60,16 @@
             var listElement = document.getElementById("list");
 
             for(i=0;i<list.length;i++) {
-                console.log(list[i]);
+                if (list[i]=="chords-list.csv" || list[i]=="") {
+                // do nothing
+                } else {
                 var a = document.createElement("a");
                 a.href = path + "Chords/" + list[i];
                 var li = document.createElement("li");
                 li.innerText = list[i];
                 a.appendChild(li);
                 listElement.appendChild(a);
+                }
             }
 
         }
@@ -46,6 +79,11 @@
             .then(text => populateList(text))
             // outputs the content of the text file
 
+        
+        function searchList(list, term){
+
+        }
+        
       </script>
 </body>
 </html>
